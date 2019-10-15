@@ -59,6 +59,6 @@ describe DockingStation do
   it "should return a list of damaged bikes in need of repair" do
     bike.damage
     subject.dock_bike(bike)
-    expect(subject.select_damaged_bikes).to include(bike)
+    expect(subject.bikes).to include(bike)
   end
 end

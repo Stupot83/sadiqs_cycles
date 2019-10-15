@@ -10,12 +10,12 @@ class DockingStation
 
   def release_bike(bike)
     raise "The dock is empty" if empty?
-    @bikes.delete(bike) if bike.damaged? == false
+    bikes.delete(bike) if bike.damaged? == false
   end
 
   def dock_bike(bike)
     raise "The dock is full" if full?
-    @bikes << bike
+    bikes << bike
   end
 
   def select_working_bikes
@@ -23,16 +23,18 @@ class DockingStation
   end
 
   def select_damaged_bikes
-    bikes.select(&:damaged?)
+    damaged_bikes = @bikes.select(&:damaged?)
+    bikes.delete_if { |bike| bike.damaged? == true }
+    return damaged_bikes
   end
 
   private
 
   def full?
-    @bikes.length >= @capacity
+    bikes.length >= @capacity
   end
 
   def empty?
-    @bikes.empty?
+    bikes.empty?
   end
 end
